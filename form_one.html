@@ -1,0 +1,62 @@
+<!DOCTYPE html>   
+<html>
+      <head>
+	        <title>Συμπλήρωση προσωπικών στοιχείων</title>
+			<meta charset="utf-8"
+	  </head>
+           	  <body>
+                   
+				   <form>
+
+						<table onsubmit="return Sendit();" id="table" style="border 1px solid blue;background-color;white;align:left;">
+						  <tr style="background-color:white;color;red;">
+								   <td colspan="33">Φόρμα επικοινωνίας</td>
+						  </tr>
+                          <br>
+                          <tr>						  
+								   <td>Ονοματεπώνυμο*:</td> <td>   <input type="text" id="ono" name="thisname"></td>
+						  </tr>
+                          <tr>						  
+								   <td >Τηλέφωνο*:</td> <td>    <input type="text" id="thle" name="telephone"></td>
+						  </tr>
+                          <tr>
+						  
+								   <td >E-mail*:</td>    <td>  <input type="text" id="imeil" name="email"></td>
+						  </tr>
+                          <tr>						  
+								   <td rowspan="6"> Αίτημα,Ερώτημα: </td> <td><textarea name="addr" id="request" rows="10" cols="55">   </textarea></td>
+						  </tr>		   
+						  <tr>			
+									<td>Τα πεδία με * είναι υποχρεωτικά.</td>
+						  </tr>
+                          <tr>
+                            <td>	<input type="submit" value="Αποστολή" id="click" onclick="Sendit()"> 	<input type="reset" value="Reset" id="again" onclick="Deletethem()">	</td>	  
+						  </tr>
+                       </table>						  
+									
+							
+									
+				  </form>
+                  
+</body>
+<script>
+          function Sendit() {
+		          var name_entry=document.getElementbyId("ono")value;
+				  var tele_entry=document.getElementbyId("thle")value;
+				  var mail_entry=document.getElementbyId("imeil")value;
+				  var rqu_entry=document.getElementbyId("request")value;
+				  if (name_entry==" "|| tele_entry==" "||mail_entry==" "||rqu_entry==" "){
+				     alert("Κάποιο πεδίο είναι κενό!");
+		          }			
+				  else if (name_entry|=" " & tele_entry|=" " & mail_entry|=" " & rqu_entry|=" "){
+				     var form=window.open(" ","Επαλήθευση", "_blank");
+					 form.document.write("Ονοματεπώνυμο: " +name_entry+"</br>"+"Τηλέφωνο: "+tele_entry+ "</br>" +"E-mail: "+mail_entry+"</br>"+"Το ερώτημά σας: " +rqu_entry+ "</br>" + "</br>"+"<a href="mailto:tasostsotras@gmail.com">);
+				  }	 
+		   }
+           function Deletethem(){
+		     document.getElementbyId("ono").value=null;
+			 document.getElementbyId("thle").value=null;
+			 document.getElementbyId("imeil").value=null;
+			 document.getElementbyId("request").value=null;
+		   } 
+		   </script> 

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head><title> Στοιχεία Δικτύου</title><link rel="stylesheet" type="text/css"  ></head>
+<body class='body'>
+<form>
+				         
+						 
+						 <fieldset style="color:red;background-color:white;">
+						     <fieldset style="color:white;background-color:blue;">
+						    <p style="color:white;">Εισάγετε τα στοιχεία του δικτύου σας</p> </fieldset>
+<strong>Διεύθυνση IPv4</strong> (Υπολογιστής ή Δίκτυο) <strong>Μάσκα Δικτύου</strong><br>  
+<input type="text" name="IP" placeholder="xxx.xxx.xxx.xxx"  id="iptt">  /
+<input type="text" name="mask" placeholder="xxx.xxx.xxx.xxx " id="masktt"><br><br>
+<input type="button" value="Calculate" id="click"> 
+<input type="reset" value="Reset">
+</form>
+<p></p>
+</body>
+<script>
+function programm(a){
+          function theobject(){
+              var object=document.createElement("p");
+              document.body.appendChild(object);
+              object.style.backgroundColor="red";
+              object.style.width="auto";
+              object.style.height="auto";
+              object.style.fontSize="25px";
+              return object;
+          }
+          function fillzero(list){
+            for(var i =0;i<list.length;i++){
+              while(list[i].length<8){
+                list[i]=0+list[i];
+              }
+            }
+
+          }
+          function convert(list){
+            var listcon=[];
+            for(var i=0;i<list.length;i++){
+              
+              listcon[i]=String(parseInt(list[i]).toString(2));
+
+            }
+            fillzero(listcon);
+            return String(listcon[0])+"."+String(listcon[1])+"."+String(listcon[2])+"."+String(listcon[3]);
+
+          }
+          var ip_entry=document.getElementById("iptt").value;
+          var mask_entry=document.getElementById("masktt").value;
+          if(ip_entry==""||mask_entry==""){
+              alert("Κάποιο πεδίο δεν έχει συμπληρωθεί");
+              return 0;
+          }
+          var ip_list=ip_entry.split(".");
+          var mask_list=mask_entry.split(".");
+          var κλαση="";
+          if(parseInt(ip_list[0])<128){
+            κλαση="A";
+          }
+          else if(parseInt(ip_list[0]<192)){
+            κλαση="B";
+          }
+          else if(parseInt(ip_list[0])<224){
+            κλαση="C";
+          }
+          else if(parseInt(ip_list[0])<240){
+            κλαση="D";
+          }
+          else if(parseInt(ip_list[0])<256){
+            κλαση="E";
+          }
+          for(var i=0;i<ip_list.length;i++){
+            if(parseInt(ip_list[i])>255){
+              alert("Είναι μεγαλύτερο του 255");
+              return 0;
+            }
+          }
+          for(var i=0;i<mask_list.length;i++){
+            if(parseInt(mask_list[i])>255){
+              alert("Είναι μεγαλύτερο του 255");
+              return 0;
+            }
+          }
+          var parag=theobject(); 
+          var conip=convert(ip_list);
+          var conmask=convert(mask_list);
+          var triggered=0;
+          var use="";
+          for(var i=0;i<conmask.length;i++){
+            for(var j=0;j<conmask[i].length;j++){
+              if(conmask[i][j]=="1"){
+                  triggered++;
+                  use+=conip[i][j];
+              }
+            }
+          }
+          while(use.length<32){
+              use+="1";
+          }
+          var host_ip="";
+          var ar=0;
+          for(var i=0;i<use.length;i++){
+            host_ip+=use[i];
+            ar++;
+            if(ar%8==0){
+              host_ip+=".";
+            }
+          }
+          var pc_in_net=(2**(32-triggered));
+          var net_ip=String(parseInt(ip_list[0])&parseInt(mask_list[0]))+"."+String(parseInt(ip_list[1])&parseInt(mask_list[1]))+"."+String(parseInt(ip_list[2])&parseInt(mask_list[2]))+"."+String(parseInt(ip_list[3])&parseInt(mask_list[3]));
+          parag.innerHTML+="Binary IP :"+conip+"<br>";
+          parag.innerHTML+="Binary Mask :"+conmask+"<br>";
+          parag.innerHTML+="Network Address :"+net_ip+"<br>";
+          parag.innerHTML+="Number of Computers  :"+String(pc_in_net)+"<br>";
+          parag.innerHTML+="Largest Address :"+host_ip+"<br>";
+          parag.innerHTML+="Class of Address  :"+classs;
+}
+document.getElementById("click").onmousedown=programm;
+</script>
+</html>
